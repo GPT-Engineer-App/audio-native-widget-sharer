@@ -1,6 +1,17 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 
 const ElevenlabsWidget = () => {
+  useEffect(() => {
+    const script = document.createElement('script');
+    script.src = "https://elevenlabs.io/player/audioNativeHelper.js";
+    script.async = true;
+    document.body.appendChild(script);
+
+    return () => {
+      document.body.removeChild(script);
+    };
+  }, []);
+
   return (
     <div className="flex flex-col items-center justify-center min-h-screen p-4">
       <div
@@ -13,9 +24,8 @@ const ElevenlabsWidget = () => {
         data-playerurl="https://elevenlabs.io/player/index.html"
         data-projectid="hSEFTqMxPyZfBc2uw8WZ"
       >
-        Loading the <a href="https://elevenlabs.io/text-to-speech" target="_blank" rel="noopener">Elevenlabs Text to Speech</a> AudioNative Player...
+        Loading the <a href="https://elevenlabs.io/text-to-speech" target="_blank" rel="noopener noreferrer">Elevenlabs Text to Speech</a> AudioNative Player...
       </div>
-      <script src="https://elevenlabs.io/player/audioNativeHelper.js" type="text/javascript"></script>
     </div>
   );
 };
