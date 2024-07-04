@@ -7,7 +7,18 @@ const ElevenlabsWidget = () => {
     script.async = true;
     document.body.appendChild(script);
 
+    const handleDOMContentLoaded = () => {
+      if (typeof ElevenLabs !== 'undefined' && ElevenLabs.init) {
+        ElevenLabs.init();
+      } else {
+        console.error('ElevenLabs script not loaded properly.');
+      }
+    };
+
+    document.addEventListener('DOMContentLoaded', handleDOMContentLoaded);
+
     return () => {
+      document.removeEventListener('DOMContentLoaded', handleDOMContentLoaded);
       document.body.removeChild(script);
     };
   }, []);
