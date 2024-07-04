@@ -7,7 +7,7 @@ const ElevenlabsWidget = () => {
     script.async = true;
     document.body.appendChild(script);
 
-    const handleDOMContentLoaded = () => {
+    const handleScriptLoad = () => {
       if (typeof ElevenLabs !== 'undefined' && ElevenLabs.init) {
         ElevenLabs.init();
       } else {
@@ -15,10 +15,10 @@ const ElevenlabsWidget = () => {
       }
     };
 
-    document.addEventListener('DOMContentLoaded', handleDOMContentLoaded);
+    script.addEventListener('load', handleScriptLoad);
 
     return () => {
-      document.removeEventListener('DOMContentLoaded', handleDOMContentLoaded);
+      script.removeEventListener('load', handleScriptLoad);
       document.body.removeChild(script);
     };
   }, []);
